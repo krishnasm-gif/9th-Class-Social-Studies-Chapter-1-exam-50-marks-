@@ -1,0 +1,1 @@
+# 9th-Class-Social-Studies-Chapter-1-exam-50-marks-
