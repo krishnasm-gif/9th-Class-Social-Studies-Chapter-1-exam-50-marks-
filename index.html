@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9th Class Social Studies Online Examination - Earth & Its Structure</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+            background-attachment: fixed;
+        }
+        .telugu-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-900 flex flex-col justify-between p-3 sm:p-6 selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-xl shadow-2xl rounded-3xl p-5 text-center sticky top-4 z-50 border-2 border-indigo-300 max-w-2xl mx-auto w-full flex justify-between items-center px-6">
+        <div>
+            <h1 class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent text-left">Class IX Social Exam</h1>
+            <p class="text-xs font-bold text-indigo-700 uppercase tracking-wider text-left">The Earth: Origin, Structure & Time Zones</p>
+        </div>
+        <button onclick="confirmEarlySubmit()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-md transition flex items-center gap-1.5 cursor-pointer">
+            <span>📤 Send Exam Now</span>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-2 py-6 max-w-2xl flex-grow w-full">
+
+        <!-- Registration Screen -->
+        <section id="registration-screen" class="bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 border-2 border-indigo-200">
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-500 via-indigo-500 to-violet-500 rounded-3xl flex items-center justify-center mx-auto text-white text-3xl shadow-lg shadow-indigo-500/40 mb-3 animate-pulse">🌍</div>
+                <h2 class="text-2xl font-black text-indigo-900">Student Registration Portal</h2>
+                <p class="text-sm text-gray-600">Enter your details below to start the 50-mark assessment. Multiple students can take the exam anytime!</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-wider text-indigo-800 mb-1.5">Class & Full Name:</label>
+                    <input type="text" id="student-name" placeholder="e.g., Class 9 - Vamshi Krishna" class="w-full px-4 py-3.5 bg-indigo-50/50 border-2 border-indigo-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition font-semibold">
+                </div>
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-wider text-indigo-800 mb-1.5">Roll Number:</label>
+                    <input type="text" id="student-roll" placeholder="e.g., 22" class="w-full px-4 py-3.5 bg-indigo-50/50 border-2 border-indigo-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition font-semibold">
+                </div>
+                <button type="button" onclick="handleRegistration()" class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:opacity-95 text-white font-black py-4 rounded-2xl shadow-xl shadow-indigo-600/35 transition-all duration-200 text-base uppercase tracking-wider cursor-pointer border border-white/30">
+                    Start 50-Mark Exam Now 🚀
+                </button>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="hidden bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 border-2 border-indigo-200">
+            <div class="flex justify-between items-center border-b border-indigo-200 pb-4">
+                <div>
+                    <span id="question-progress" class="text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Question 1 of 10</span>
+                    <h3 id="question-title" class="text-lg font-black text-gray-900 mt-0.5">Question Title</h3>
+                </div>
+                <div id="timer-box" class="flex items-center space-x-1.5 bg-amber-500 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-amber-500/30">
+                    <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span><span id="time-remaining">180</span>s</span>
+                </div>
+            </div>
+
+            <!-- Question Content -->
+            <div class="space-y-4">
+                <p id="question-text" class="text-base sm:text-lg font-bold text-gray-900 leading-snug"></p>
+                <div class="bg-gradient-to-r from-blue-50 via-indigo-500/10 to-violet-50 border-2 border-indigo-200 p-4 rounded-2xl shadow-inner">
+                    <p class="text-xs font-extrabold text-indigo-800 mb-1 flex items-center gap-1.5 uppercase tracking-wide">✨ తెలుగు అనువాదం (Telugu Translation):</p>
+                    <p id="question-telugu" class="telugu-text font-semibold"></p>
+                </div>
+            </div>
+
+            <!-- Options Container -->
+            <div id="options-container" class="space-y-3">
+                <!-- Dynamically injected options -->
+            </div>
+
+            <div class="flex justify-between pt-4 border-t border-indigo-200">
+                <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-3 bg-indigo-100 border-2 border-indigo-200 rounded-2xl text-sm font-black text-indigo-700 hover:bg-indigo-200 disabled:opacity-30 disabled:cursor-not-allowed transition">Previous</button>
+                <button id="next-btn" onclick="nextQuestion()" class="px-7 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-90 text-white rounded-2xl text-sm font-black shadow-lg shadow-indigo-600/30 transition uppercase tracking-wider">Next Question ➔</button>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="hidden bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 text-center border-2 border-indigo-200">
+            <div class="space-y-2">
+                <div class="w-20 h-20 bg-gradient-to-tr from-emerald-400 to-teal-600 text-white rounded-3xl flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/40 mb-3 animate-bounce">🏆</div>
+                <h2 class="text-2xl sm:text-3xl font-black bg-gradient-to-r from-emerald-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Exam Submitted Successfully!</h2>
+                <p id="dispatch-status-msg" class="text-xs sm:text-sm text-gray-600">Sending results to <strong>balaswamysm@gmail.com</strong> & WhatsApp...</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 via-indigo-500/10 to-violet-50 border-2 border-indigo-200 rounded-2xl p-5 space-y-4 text-left shadow-md">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-xs font-black text-indigo-700 uppercase tracking-wider">Student Name</p>
+                        <p id="res-name" class="font-bold text-gray-900 text-sm mt-0.5">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-indigo-700 uppercase tracking-wider">Roll Number</p>
+                        <p id="res-roll" class="font-bold text-gray-900 text-sm mt-0.5">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-indigo-700 uppercase tracking-wider">Total Score</p>
+                        <p class="text-xl font-black text-emerald-600"><span id="res-score">-</span> / 50 <span class="text-xs font-semibold text-gray-500">(10 Qns)</span></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-indigo-700 uppercase tracking-wider">Percentage</p>
+                        <p class="text-xl font-black text-violet-600"><span id="res-percentage">-</span></p>
+                    </div>
+                </div>
+
+                <div class="border-t border-indigo-200 pt-3 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-extrabold text-gray-800">Final Grade:</span>
+                        <span id="res-grade" class="text-2xl font-black px-5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-600/40">-</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-white/80 px-4 py-2 rounded-xl border border-indigo-100">
+                        <span class="text-xs font-bold text-indigo-900">Performance Feedback:</span>
+                        <span id="res-performance" class="text-xs font-black text-indigo-700 uppercase tracking-wide">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-left space-y-2">
+                <h3 class="font-black text-gray-800 text-sm flex items-center gap-2 uppercase tracking-wide">📊 Detailed Answer Review:</h3>
+                <div id="review-container" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                    <!-- Review injected here -->
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="resetForNewStudent()" class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-90 text-white font-black py-3.5 rounded-2xl text-sm uppercase tracking-wider transition shadow-md cursor-pointer">
+                    Register New Student 👤
+                </button>
+                <button onclick="location.reload()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 border-2 border-indigo-200 font-black px-5 py-3.5 rounded-2xl text-sm uppercase tracking-wider transition shadow-md cursor-pointer">
+                    Exit 🚪
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/85 backdrop-blur-xl border border-indigo-200 py-3 text-center text-xs text-indigo-900 font-bold rounded-2xl max-w-2xl mx-auto w-full shadow-xl">
+        &copy; 2026 Telangana State Education Board | 9th Class Social Studies Examination Hub
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        const questions = [
+            {
+                id: 1,
+                title: "Question 1 (Multiple Choice - 5 Marks)",
+                question: "What is the Big Bang according to scientific theories?",
+                telugu: "శాస్త్రీయ సిద్ధాంతాల ప్రకారం బిగ్ బాంగ్ (Big Bang) అంటే ఏమిటి?",
+                options: [
+                    { text: "A colossal cosmic explosion that marked the birth of the universe roughly 13.7 billion years ago", isCorrect: true, teluguTrans: "దాదాపు 13.7 బిలియన్ సంవత్సరాల క్రితం విశ్వ ఆవిర్భావానికి కారణమైన భారీ విశ్వ విస్ఫోటనం" },
+                    { text: "The collision of tectonic plates forming the Himalayas", isCorrect: false, teluguTrans: "హిమాలయాలను ఏర్పరిచిన టెక్టోనిక్ ప్లేట్ల ఢీకొనడం" },
+                    { text: "An earthquake originating deep inside the Earth's mantle", isCorrect: false, teluguTrans: "భూమి మాంటిల్ లోపల ఉద్భవించే భూకంపం" },
+                    { text: "The breakup of the supercontinent Pangaea into Gondwana and Laurasia", isCorrect: false, teluguTrans: "పాంజియా ఖండం గోండ్వానా మరియు లారേഷ్యాగా విడిపోవడం" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Question 2 (Multiple Choice - 5 Marks)",
+                question: "What does a geographic 'Grid' consist of on maps and globes?",
+                telugu: "భూగోళాలు మరియు మ్యాప్‌లలో భౌగోళిక 'గ్రిడ్' (Grid) దేనితో ఏర్పడుతుంది?",
+                options: [
+                    { text: "Only political boundaries of countries", isCorrect: false, teluguTrans: "దేశాల రాజకీయ సరిహద్దులు మాత్రమే" },
+                    { text: "A systematic network of intersecting parallel lines of latitude and meridians of longitude", isCorrect: true, teluguTrans: "అక్షాంశాలు మరియు రేఖాంశాలు ఖండించుకునే క్రమబద్ధమైన వలయ నెట్‌వర్క్" },
+                    { text: "Contour lines depicting mountain elevations", isCorrect: false, teluguTrans: "పర్వత ఎత్తులను తెలిపే కాంటూర్ లైన్లు" },
+                    { text: "Time zones spanning 15 degrees each", isCorrect: false, teluguTrans: "ఒక్కొక్కటి 15 డిగ్రీల చొప్పున విస్తరించి ఉన్న కాల మండలాలు" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Question 3 (Multiple Choice - 5 Marks)",
+                question: "Which ancient southern supercontinent included present-day India, Africa, and Australia after Pangaea broke up?",
+                telugu: "పాంజియా విడిపోయిన తర్వాత ప్రస్తుత భారతదేశం, ఆఫ్రికా మరియు ఆస్ట్రేలియాలను కలిగి ఉన్న ప్రాచీన దక్షిణ మహాఖండం ఏది?",
+                options: [
+                    { text: "Laurasia", isCorrect: false, teluguTrans: "లారേഷ్యా" },
+                    { text: "Gondwana", isCorrect: true, teluguTrans: "గోండ్వానా" },
+                    { text: "Pangaea Prime", isCorrect: false, teluguTrans: "పాంజియా ప్రైమ్" },
+                    { text: "Tethys Sea", isCorrect: false, teluguTrans: "టెథిస్ సముద్రం" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Question 4 (Multiple Choice - 5 Marks)",
+                question: "How many degrees of longitude does each of the 24 global Time Zones span?",
+                telugu: "ప్రపంచంలోని 24 కాల మండలాలలో (Time Zones) ప్రతి ఒక్కటి ఎన్ని డిగ్రీల రేఖాంశాన్ని కలిగి ఉంటుంది?",
+                options: [
+                    { text: "10 degrees", isCorrect: false, teluguTrans: "10 డిగ్రీలు" },
+                    { text: "15 degrees", isCorrect: true, teluguTrans: "15 డిగ్రీలు" },
+                    { text: "30 degrees", isCorrect: false, teluguTrans: "30 డిగ్రీలు" },
+                    { text: "45 degrees", isCorrect: false, teluguTrans: "45 డిగ్రీలు" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Question 5 (Multiple Choice - 5 Marks)",
+                question: "Why is it difficult to study the internal structure and formation of the Earth directly?",
+                telugu: "భూమి యొక్క అంతర్గత నిర్మాణం మరియు ఆవిర్భావాన్ని నేరుగా అధ్యయనం చేయడం ఎందుకు కష్టం?",
+                options: [
+                    { text: "Because deep mines reach only a few kilometers down, whereas the Earth's radius is over 6,300 km", isCorrect: true, teluguTrans: "ఎందుకంటే లోతైన గనులు కొన్ని కిలోమీటర్లు మాత్రమే వెళ్తాయి, కానీ భూమి వ్యాసార్థం 6,300 కి.మీ. కంటే ఎక్కువ" },
+                    { text: "Because there are no volcanoes or seismic waves available", isCorrect: false, teluguTrans: "ఎందుకంటే అంఅకంపన తరంగాలు లేదా అగ్నిపర్వతాలు అందుబాటులో లేవు" },
+                    { text: "Because the Earth was formed only 5,000 years ago", isCorrect: false, teluguTrans: "ఎందుకంటే భూమి కేవలం 5,000 సంవత్సరాల క్రితం మాత్రమే ఏర్పడింది" },
+                    { text: "Because latitude and longitude lines block underground research", isCorrect: false, teluguTrans: "ఎందుకంటే అక్షాంశ రేఖాంశ రేఖలు భూగర్భ పరిశోధనలను అడ్డుకుంటాయి" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Question 6 (True/False - 5 Marks)",
+                question: "True or False: Standard time is adopted uniformly across an entire country based on a centrally passing meridian rather than local solar time.",
+                telugu: "సత్యమా లేదా అసత్యమా: స్థానిక సౌరకాలానికి బదులుగా మధ్యలో వెళ్లే మెరిడియన్ ఆధారంగా ప్రామాణిక కాలం దేశం అంతటా ఒకే విధంగా పాటించబడుతుంది.",
+                options: [
+                    { text: "True", isCorrect: true, teluguTrans: "సత్యం (True)" },
+                    { text: "False", isCorrect: false, teluguTrans: "అసత్యం (False)" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Question 7 (True/False - 5 Marks)",
+                question: "True or False: If every state in India followed its own local solar time, railway timetables and nationwide communications would remain completely orderly and unmanaged.",
+                telugu: "సత్యమా లేదా అసత్యమా: భారతదేశంలోని ప్రతి రాష్ట్రం తన సొంత స్థానిక సౌరకాలాన్ని అనుసరిస్తే, రైల్వే సమయసార్లు మరియు దేశవ్యాప్త通信లు పూర్తిగా సక్రమంగా మరియు సులభంగా ఉంటాయి.",
+                options: [
+                    { text: "False", isCorrect: true, teluguTrans: "అసత్యం (False)" },
+                    { text: "True", isCorrect: false, teluguTrans: "సత్యం (True)" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Question 8 (True/False - 5 Marks)",
+                question: "True or False: The Earth is still active because mantle material continuously shoots up through volcanoes and tectonic plates constantly shift.",
+                telugu: "సత్యమా లేదా అసత్యమా: మాంటిల్ పదార్థం అగ్నిపర్వతాల ద్వారా నిరంతరం పైకి దూసుకురావడం మరియు టెక్టోనిక్ ప్లేట్లు నిరంతరం కదలడం వల్ల భూమి ఇప్పటికీ క్రియాశీలకంగా ఉంది.",
+                options: [
+                    { text: "True", isCorrect: true, teluguTrans: "సత్యం (True)" },
+                    { text: "False", isCorrect: false, teluguTrans: "అసత్యం (False)" }
+                ]
+            },
+            {
+                id: 9,
+                title: "Question 9 (True/False - 5 Marks)",
+                question: "True or False: The Equator is a vertical semi-circle passing through Greenwich, England, dividing the Earth into Eastern and Western hemispheres.",
+                telugu: "సత్యమా లేదా అసత్యమా: భూమధ్యరేఖ (Equator) అనేది ఇంగ్లాండ్‌లోని గ్రీన్‌విచ్ గుండా వెళ్లే నిలువు అర్ధ వృత్తం, ఇది భూమిని తూర్పు మరియు పశ్చిమ గోళాలుగా విభజిస్తుంది.",
+                options: [
+                    { text: "False", isCorrect: true, teluguTrans: "అసత్యం (False)" },
+                    { text: "True", isCorrect: false, teluguTrans: "సత్యం (True)" }
+                ]
+            },
+            {
+                id: 10,
+                title: "Question 10 (True/False - 5 Marks)",
+                question: "True or False: Travelling westward from New Delhi to Paris means moving into earlier time zones.",
+                telugu: "సత్యమా లేదా అసత్యమా: న్యూఢిల్లీ నుండి పారిస్‌కు పశ్చిమంగా ప్రయాణించడం అంటే మునుపటి కాల మండలాల్లోకి (earlier time zones) ప్రయాణించడం.",
+                options: [
+                    { text: "True", isCorrect: true, teluguTrans: "సత్యం (True)" },
+                    { text: "False", isCorrect: false, teluguTrans: "అసత్యం (False)" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = {};
+        let timeLeft = 180;
+        let timerInterval = null;
+        let studentData = {};
+        let audioCtx = null;
+
+        function handleRegistration() {
+            const name = document.getElementById('student-name').value.trim();
+            const roll = document.getElementById('student-roll').value.trim();
+            
+            if (!name || !roll) {
+                alert('Please enter both your name and roll number!');
+                return;
+            }
+
+            studentData = { name, roll };
+            currentQuestion = 0;
+            userAnswers = {};
+
+            document.getElementById('registration-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function playWarningBeep() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = 880;
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.2);
+            } catch(e) {
+                console.log("Audio alert active");
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 180;
+            document.getElementById('time-remaining').innerText = timeLeft;
+            const timerBox = document.getElementById('timer-box');
+            timerBox.className = "flex items-center space-x-1.5 bg-amber-500 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-amber-500/30";
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time-remaining').innerText = timeLeft;
+
+                if (timeLeft <= 20) {
+                    timerBox.className = "flex items-center space-x-1.5 bg-red-600 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-red-600/50 animate-bounce";
+                    playWarningBeep();
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            startTimer();
+            const q = questions[currentQuestion];
+            document.getElementById('question-progress').innerText = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question-title').innerText = q.title;
+            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('question-telugu').innerText = q.telugu;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentQuestion] === idx;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `w-full text-left p-4 rounded-2xl border-2 transition-all duration-200 flex flex-col space-y-1.5 cursor-pointer ${isSelected ? 'border-violet-500 bg-gradient-to-r from-blue-50 via-indigo-500/10 to-violet-50 shadow-lg shadow-violet-500/20 ring-2 ring-violet-500/40' : 'border-indigo-200 bg-white hover:bg-indigo-50/50 hover:border-indigo-300'}`;
+                btn.onclick = () => selectOption(idx);
+                
+                btn.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-gray-900">${opt.text}</span>
+                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ml-2 ${isSelected ? 'border-violet-600 bg-violet-600 text-white shadow-md' : 'border-indigo-300 bg-indigo-50'}">
+                            ${isSelected ? '<div class="w-2.5 h-2.5 bg-white rounded-full"></div>' : ''}
+                        </div>
+                    </div>
+                    <span class="text-xs text-indigo-700 font-bold italic">${opt.teluguTrans}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').innerText = currentQuestion === questions.length - 1 ? 'Submit Exam ✨' : 'Next Question ➔';
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            loadQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            clearInterval(timerInterval);
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                submitExam();
+            }
+        }
+
+        function confirmEarlySubmit() {
+            if(confirm("Are you sure you want to send your exam now?")) {
+                clearInterval(timerInterval);
+                submitExam();
+            }
+        }
+
+        function getGradeDetails(percentage) {
+            if (percentage >= 95) return { grade: 'A+', word: 'Outstanding (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 85) return { grade: 'A', word: 'Excellent (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 75) return { grade: 'A-', word: 'Very Good (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 65) return { grade: 'B+', word: 'Good (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 55) return { grade: 'B', word: 'Above Average (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 45) return { grade: 'B-', word: 'Average (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 35) return { grade: 'C+', word: 'Satisfactory (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 25) return { grade: 'C', word: 'Fair (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 15) return { grade: 'C-', word: 'Passable (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 5) return { grade: 'D', word: 'Low Pass (' + percentage.toFixed(1) + '%)' };
+            return { grade: 'F', word: 'Fail (' + percentage.toFixed(1) + '%)' };
+        }
+
+        function submitExam() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            let score = 0;
+            let reviewHTML = '';
+
+            questions.forEach((q, qIdx) => {
+                const userChoice = userAnswers[qIdx];
+                const correctOpt = q.options.find(o => o.isCorrect);
+                const userOpt = userChoice !== undefined ? q.options[userChoice] : null;
+                const isCorrect = userOpt ? userOpt.isCorrect : false;
+
+                if (isCorrect) score += 5; // 5 marks each = 50 total
+
+                reviewHTML += `
+                    <div class="p-4 rounded-2xl border-2 text-xs space-y-1.5 shadow-md ${isCorrect ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-rose-50 border-rose-300 text-rose-900'}">
+                        <p class="font-extrabold text-gray-900">Q${qIdx + 1}: ${q.question}</p>
+                        <p><strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">Your Answer:</strong> ${userOpt ? userOpt.text : 'Not Attempted'}</p>
+                        ${!isCorrect ? `<p><strong class="text-emerald-700">Correct Answer:</strong> ${correctOpt.text}</p>` : ''}
+                    </div>
+                `;
+            });
+
+            const percentage = (score / 50) * 100;
+            const gradeInfo = getGradeDetails(percentage);
+
+            document.getElementById('res-name').innerText = studentData.name;
+            document.getElementById('res-roll').innerText = studentData.roll;
+            document.getElementById('res-score').innerText = score;
+            document.getElementById('res-percentage').innerText = percentage.toFixed(1) + '%';
+            document.getElementById('res-grade').innerText = gradeInfo.grade;
+            document.getElementById('res-performance').innerText = gradeInfo.word;
+            document.getElementById('review-container').innerHTML = reviewHTML;
+
+            dispatchResultsAutomatically(studentData, score, percentage, gradeInfo);
+        }
+
+        function dispatchResultsAutomatically(student, score, percentage, gradeInfo) {
+            const recipientEmail = "balaswamysm@gmail.com";
+            const whatsappNumber = "916360572067"; // Country code +91 for India
+            const reportText = 
+                `📌 *9TH CLASS SOCIAL EXAM REPORT* 📌\n\n` +
+                `👤 *Student Name:* ${student.name}\n` +
+                `🔢 *Roll Number:* ${student.roll}\n` +
+                `🏆 *Total Score:* ${score} / 50 (10 Questions)\n` +
+                `📈 *Percentage:* ${percentage.toFixed(1)}%\n` +
+                `🎖️ *Grade:* ${gradeInfo.grade} (${gradeInfo.word})\n` +
+                `📚 *Subject:* 9th Class Social Studies - Earth & Structure`;
+
+            const statusMsg = document.getElementById('dispatch-status-msg');
+
+            // 1. Send Email via Formspree endpoint
+            fetch(`https://formspree.io/f/xeaovezd`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: recipientEmail,
+                    subject: `9th Class Exam Results: ${student.name} (Roll: ${student.roll})`,
+                    message: reportText
+                })
+            }).then(response => {
+                if (response.ok) {
+                    statusMsg.innerHTML = `✅ Results dispatched to Email & WhatsApp successfully!`;
+                } else {
+                    statusMsg.innerHTML = `⚠️ Results generated, but email delivery encountered an issue.`;
+                }
+            }).catch(() => {
+                statusMsg.innerHTML = `✅ Results generated successfully!`;
+            });
+
+            // 2. Open WhatsApp API link automatically for instant notification
+            const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(reportText)}`;
+            
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 1000);
+        }
+
+        function resetForNewStudent() {
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('registration-screen').classList.remove('hidden');
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-roll').value = '';
+            userAnswers = {};
+        }
+    </script>
+</body>
+</html>
